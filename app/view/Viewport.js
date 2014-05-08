@@ -8,6 +8,7 @@ Ext.define('Clutch.view.Viewport', {
     //'Clutch.view.search.SearchField', 
     'Clutch.view.torrent.TorrentsPanel',
     'Clutch.view.search.piratebay.SearchPanel',
+	'Clutch.view.search.dlm.SearchPanel',
      'Clutch.view.search.piratebay.TopPanel', 
      'Clutch.view.BottomToolbar', 
      'Ext.layout.container.Border', 
@@ -41,7 +42,10 @@ Ext.define('Clutch.view.Viewport', {
         },
         {
             xtype : 'piratebaytoppanel'
-        }
+        },
+		{
+			xtype: 'dlmsearchpanel'
+		}
         ]
 
     }]

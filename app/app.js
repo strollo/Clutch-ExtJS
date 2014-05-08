@@ -18,7 +18,9 @@ Ext.Loader.setPath({
 
     'Transmission' : 'packages/transmissionrpc',
 
-    'RottenTomatoes' : 'packages/rottentomatoes'
+    'RottenTomatoes' : 'packages/rottentomatoes',
+	
+	'dlm' : 'packages/dlm'
 
 });
 
@@ -45,6 +47,8 @@ Ext.application({
             torrentsGrid : 'Clutch.view.torrent.TorrentsGrid',
 
             pirateBayService : 'PirateBay.Search',
+
+            dlmService : 'dlm.Search',
 
             rpcService : 'Transmission.RPC',
 
