@@ -110,6 +110,7 @@ Ext.define('Clutch.controller.DlmController', {
          this.getSearchGrid().loadResults();
     },
     doSearch : function() {
+		debugger;
 		console.log('doSearch');
         this.beforeSearch();
         var searchTerm = this.getSearchField().getValue();
