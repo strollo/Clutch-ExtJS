@@ -1,8 +1,10 @@
 Ext.define('Clutch.view.search.dlm.SearchPanel', {
-    
-    requires : ['Clutch.view.search.dlm.SearchResultGrid','Clutch.view.search.SearchTree', 'Clutch.view.search.properties.DetailsPanel'],
-    
+
+    requires : ['Clutch.view.search.dlm.SearchResultGrid', 'Clutch.view.search.SearchTree', 'Clutch.view.search.properties.DetailsPanel', 'Dlm.Search'],
+
     extend : 'Ext.panel.Panel',
+
+    controller : 'Clutch.controller.DlmController',
 
     alias : 'widget.dlmsearchpanel',
 
@@ -14,16 +16,31 @@ Ext.define('Clutch.view.search.dlm.SearchPanel', {
 
     items : [{
         xtype : 'searchtree',
-        region : 'west'
-        
+        region : 'west',
+        collapsible : true,
+        split : true
     }, {
-        xtype : 'dlmsearchresultgrid',
+        xtype : 'panel',
+        
+        layout : 'fit',
+        
         region : 'center',
-        title : 'DLM Search Results'
+        tbar : Ext.create('Clutch.view.search.SearchToolbar', {
+            searchEmptyText : 'Search The DLM'
+        }),
+
+        items : [{
+            xtype : 'dlmsearchresultgrid',
+
+        }]
     }, {
         xtype : 'searchresultdetailspanel',
-        region : 'east'
-        
+        region : 'east',
+        collapsed : true,
+        collapsible : true,
+        split : true,
+        width : 400,
+        hideComments : true
     }]
 
 });
