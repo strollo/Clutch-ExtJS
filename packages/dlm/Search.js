@@ -2,161 +2,112 @@
  */
 Ext.define('dlm.Search', {
 
-    requires: ['Ext.data.JsonP'],
-        
-    mixins : {
-        observable : 'Ext.util.Observable'
-    },
-    singleton : true,
+	requires : ['Ext.data.JsonP'],
 
-    config : {
+	mixins : {
+		observable : 'Ext.util.Observable'
+	},
+	singleton : true,
 
-        apiUrl : 'http://apify.ifc0nfig.com/tpb/search?id={0}&key=121a959a04d443c8a163f7603c043040',
+	config : {
+		apiUrl : 'http://localhost:8080/search/Search.php?what={0}',
+		topUrl : 'http://apify.ifc0nfig.com/tpb/top?id=all&key=121a959a04d443c8a163f7603c043040'
+	},
 
-        topUrl : 'http://apify.ifc0nfig.com/tpb/top?id=all&key=121a959a04d443c8a163f7603c043040'
+	constructor : function (config) {
+		var me = this;
+		me.initConfig(config);
+		me.mixins.observable.constructor.call(me, config);
+	},
 
-    },
+	search : function (searchTerm) {
+		searchTerm = encodeURIComponent(searchTerm);
+		var apiUrl = this.getApiUrl(),
+		url = Ext.String.format(apiUrl, searchTerm);
+		var deferred = Ext.create('Deft.promise.Deferred');
 
-    constructor : function(config) {
-	debugger;
-        var me = this;
+		Ext.data.JsonP.request({
+			url : url,
 
-        me.initConfig(config);
+			success : function (results) {
+				var betterResults = [];
+				Ext.each(results.data, function (r) {
+					betterResults.push(this.cleanUpResult(r));
+				}, this);
+				deferred.resolve(betterResults);
+			},
+			scope : this,
 
-        me.mixins.observable.constructor.call(me, config);
-       
-    },
+			failure : function (response) {
+				deferred.reject('Failed to perform search at The DLM');
+			}
+		});
 
-    search : function(searchTerm) {
-		debugger;
-        searchTerm = encodeURIComponent(searchTerm);
-        var apiUrl = this.getApiUrl(), url = Ext.String.format(apiUrl, searchTerm);
-        var deferred = Ext.create('Deft.promise.Deferred');
-        
-        Ext.data.JsonP.request({
-            url : url,
+		return deferred.promise;
 
-            success : function(results) {
-               var betterResults = [];
-                Ext.each(results, function(r) {
-                    betterResults.push(this.cleanUpResult(r));
-                }, this);
-                              
-                deferred.resolve(betterResults);
-  //              deferred.resolve(results);
-               
-            },
-            scope : this,
+	},
+	
+	cleanUpResult : function (r) {
+		elem = r;
+		var SearchResult = {
+			plugin: elem.plugin,
+			name : elem.title,
+			category : elem.category,
+			seeds : elem.seeds,
+			leechers : elem.leechs,
+			torrentLink : elem.download,
+			commentsLink : '',
+			summaryLink : '',
+			pubDate : this.tryParseDate(elem.datetime), //todo convert this crap
+			id : elem.hash,
+			// size : this.tryParseSize(elem.size), //also needs converting,
+			size: elem.size, //also needs converting,
+			downloads : 0,
+			comments : 0
+		}
+		return SearchResult;
+	},
 
-            failure : function(response) {
-                deferred.reject('Failed to perform search at The DLM');
-              }
-        });
-        
-        return deferred.promise;
+	tryParseDate : function (badDate) {
+		var prefixYear = (new Date().getYear() + 1900) + " ";
+		// Date.getYear() gives the current year - 1900
+		var dateFormat1 = "yyyy MM-dd HH:mm";
+		var dateFormat2 = "yyyy-MM-dd";
 
-    },
-    getTopResults : function(callingGrid) {
-        var url = this.getTopUrl();
-        var deferred = Ext.create('Deft.promise.Deferred');
-       
-        Ext.data.JsonP.request({
-            url : url,
+		var possGoodDate = new Date(Date.parse(prefixYear + badDate, dateFormat1));
+		if (possGoodDate != 'Invalid Date') { //MAKE SURE TO KEEP !=, using !== always returns true
+			return possGoodDate;
+		}
 
-            success : function(results) {
-                var betterResults = [];
-                Ext.each(results, function(r) {
-                    betterResults.push(this.cleanUpResult(r));
-                }, this);
-              
-                deferred.resolve(betterResults);
+		possGoodDate = new Date(Date.parse(badDate, dateFormat2));
+		if (possGoodDate != 'Invalid Date') {
+			return possGoodDate;
+		}
+		//must be in "Today/Y-Day" format, just return todays date
+		return new Date();
+	},
 
-            },
-            scope : this,
-
-            failure : function(response) {
-
-                //Clutch.app.fireEvent('searchfail', response, callingGrid);
-                deferred.reject('Failed to perform search at The DLM')
-            }
-        });
-        
-        return deferred.promise;
-    },
-    
-        cleanUpResult : function(r) {
-
-        var SearchResult = {
-            name : r.name,
-
-            category : r.category,
-
-            seeds : r.seeders,
-
-            leechers : r.leechers,
-
-            torrentLink : r.magnet,
-
-            commentsLink : '',
-
-            summaryLink : '',
-
-            provider : 'The DLM',
-
-            pubDate : this.tryParseDate(r.uploaded), //todo convert this crap
-
-            id : r.id,
-
-            size : this.tryParseSize(r.size), //also needs converting,
-
-            downloads : 0,
-
-            comments : 0
-
-        }
-        return SearchResult;
-    },
-
-    tryParseDate : function(badDate) {
-        var prefixYear = (new Date().getYear() + 1900) + " ";
-        // Date.getYear() gives the current year - 1900
-        var dateFormat1 = "yyyy MM-dd HH:mm";
-        var dateFormat2 = "MM-dd yyyy";
-
-        var possGoodDate = new Date(Date.parse(prefixYear + badDate, dateFormat1));
-        if (possGoodDate != 'Invalid Date') {//MAKE SURE TO KEEP !=, using !== always returns true
-            return possGoodDate;
-        }
-
-        possGoodDate = new Date(Date.parse(badDate, dateFormat2));
-        if (possGoodDate != 'Invalid Date') {
-            return possGoodDate;
-        }
-        //must be in "Today/Y-Day" format, just return todays date
-        return new Date();
-    },
-
-    tryParseSize : function(badSize) {
-        var split = badSize.split(" "), units = split[1], badValue = split[0], goodValue = 0;
-        switch(units) {
-            case 'MiB':
-                goodValue = badValue * 1024 * 1024;
-                break
-            case 'GiB':
-                goodValue = badValue * 1024 * 1024 * 1024;
-                break;
-            case 'KiB':
-                goodValue = badValue * 1024;
-                break;
-            case 'B':
-                goodValue = badValue * 1;
-                break;
-            default:
-                console.log('Unknown unit: ' + units);
-                break;
-        }
-        return goodValue;
-
-    },
+	tryParseSize : function (badSize) {
+		var currVal = badSize;
+		var currLbl = 'B';
+		if (currVal / 1000 > 1) {
+			currLbl = 'Kb';
+			currVal = currVal / 1000;
+		} else {
+			return parseFloat(currVal).toFixed(2).toString() + ' ' + currLbl;
+		}
+		if (currVal / 1000 > 1) {
+			currLbl = 'Mb';
+			currVal = currVal / 1000;
+		} else {
+			return parseFloat(currVal).toFixed(2).toString() + ' ' + currLbl;
+		}
+		if (currVal / 1000 > 1) {
+			currLbl = 'Gb';
+			currVal = currVal / 1000;
+		} else {
+			return parseFloat(currVal).toFixed(2).toString() + ' ' + currLbl;
+		}
+		return parseFloat(currVal).toFixed(2).toString() + ' ' + currLbl;
+	},
 });
-

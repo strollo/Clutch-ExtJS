@@ -73,7 +73,7 @@ Ext.define('Transmission.model.LowDetailTorrent', {
                 var allPeers = model.get('peers'), nonSeeds = 0;
 
                 Ext.each(allPeers, function(p) {
-                    debugger;
+                    // debugger;
                     if (p.progress < 1) {
 
                         nonSeeds++;
@@ -111,12 +111,12 @@ Ext.define('Transmission.model.LowDetailTorrent', {
             Ext.each(allPeers, function(p) {
             
                 if (p.progress === 1) {
-                    debugger;
+                    // debugger;
                     seeds++;
 
                 }
             }, this);
-            debugger;
+            // debugger;
             return seeds;
         }
     }, {
