@@ -1,9 +1,9 @@
-Ext.define('Clutch.controller.DlmController', {
+Ext.define('JTSD.Controller', {
     extend : 'Deft.mvc.ViewController',
-    inject : ['rpcService', 'dlmService'],
+    inject : ['rpcService', 'jtsdService'],
     config : {
         rpcService : null,
-        dlmService : null
+        jtsdService : null
     },
 
     control : {
@@ -65,7 +65,7 @@ Ext.define('Clutch.controller.DlmController', {
 		console.log('doSearch');
         this.beforeSearch();
         var searchTerm = this.getSearchField().getValue();
-        this.getDlmService().search(searchTerm).then({
+        this.getJtsdService().search(searchTerm).then({
             success : function(results) {
 				console.log('onAfterSearch');
                 this.onAfterSearch(results);

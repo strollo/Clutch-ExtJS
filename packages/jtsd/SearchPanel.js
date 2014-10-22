@@ -1,10 +1,15 @@
-Ext.define('Clutch.view.search.dlm.SearchPanel', {
-    requires : ['Clutch.view.search.dlm.SearchResultGrid', 'Clutch.view.search.SearchTree', 'Clutch.view.search.properties.DetailsPanel', 'Dlm.Search'],
+Ext.define('JTSD.SearchPanel', {
+    requires : [
+		'JTSD.SearchResultGrid', 
+		'Clutch.view.search.SearchTree', 
+		'Clutch.view.search.properties.DetailsPanel', 
+		'JTSD.Search'
+	],
     extend : 'Ext.panel.Panel',
-    controller : 'Clutch.controller.DlmController',
-    alias : 'widget.dlmsearchpanel',
+    controller : 'JTSD.Controller',
+    alias : 'widget.jtsdsearchpanel',
     layout : 'border',
-    title : 'DLM Search',
+    title : 'JTSD Search',
     selectable : true,
 
     items : [{
@@ -19,10 +24,10 @@ Ext.define('Clutch.view.search.dlm.SearchPanel', {
         
         region : 'center',
         tbar : Ext.create('Clutch.view.search.SearchToolbar', {
-            searchEmptyText : 'Search The DLM'
+            searchEmptyText : 'Search The JTSD'
         }),
         items : [{
-            xtype : 'dlmsearchresultgrid',
+            xtype : 'jtsdsearchresultgrid',
         }]
     }
 	]

@@ -5,9 +5,8 @@ Ext.define('Clutch.view.Viewport', {
 	extend : 'Ext.container.Viewport',
 
 	requires : [
-		//'Clutch.view.search.SearchField',
 		'Clutch.view.torrent.TorrentsPanel',
-		'Clutch.view.search.dlm.SearchPanel',
+		'JTSD.SearchPanel',
 		'Clutch.view.BottomToolbar',
 		'Ext.layout.container.Border',
 		'Clutch.view.MainToolbar',
@@ -31,9 +30,11 @@ Ext.define('Clutch.view.Viewport', {
 			items : [
 			{
 				xtype : 'torrentspanel'
-			}, {
-				xtype : 'dlmsearchpanel'
-			}]
+			}, 
+			{
+				xtype : 'jtsdsearchpanel'
+			}
+			]
 		}
 	]
 

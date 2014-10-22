@@ -1,6 +1,6 @@
 /**
  */
-Ext.define('dlm.Search', {
+Ext.define('JTSD.Search', {
 
 	requires : ['Ext.data.JsonP'],
 
@@ -10,8 +10,7 @@ Ext.define('dlm.Search', {
 	singleton : true,
 
 	config : {
-		apiUrl : 'http://localhost:8080/search/Search.php?what={0}',
-		topUrl : 'http://apify.ifc0nfig.com/tpb/top?id=all&key=121a959a04d443c8a163f7603c043040'
+		apiUrl : 'http://localhost:8080/search/Search.php?what={0}'
 	},
 
 	constructor : function (config) {
@@ -39,7 +38,7 @@ Ext.define('dlm.Search', {
 			scope : this,
 
 			failure : function (response) {
-				deferred.reject('Failed to perform search at The DLM');
+				deferred.reject('Failed to perform search at The JTSD');
 			}
 		});
 

@@ -1,5 +1,5 @@
-Ext.define('Clutch.view.search.dlm.SearchResultGrid', {
-    alias : 'widget.dlmsearchresultgrid',
+Ext.define('JTSD.SearchResultGrid', {
+    alias : 'widget.jtsdsearchresultgrid',
     extend : 'Clutch.view.search.SearchResultGridBase',
     requires : ['Clutch.view.search.SearchToolbar'],
     store : Ext.create('Clutch.store.SearchResult'),

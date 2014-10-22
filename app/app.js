@@ -7,16 +7,14 @@ if (isPhone() === true) {
 	location.href = '/transmission/web/mobile/index.html';
 }
 
-//<debug>
 Ext.Loader.setPath({
 	'Clutch' : 'app',
 	'Deft' : 'packages/deft/src/js',
 	'Transmission' : 'packages/transmissionrpc',
-	'dlm' : 'packages/dlm'
+	"JTSD": "packages/jtsd"
 });
 
 Ext.syncRequire(['Deft.mixin.Injectable', 'Deft.mixin.Controllable']);
-//</debug>
 
 Ext.application({
 	name : 'Clutch',
@@ -30,7 +28,7 @@ Ext.application({
 		Deft.Injector.configure({
 			torrentsStore : 'Clutch.store.TorrentTransfers',
 			torrentsGrid : 'Clutch.view.torrent.TorrentsGrid',
-			dlmService : 'dlm.Search',
+			jtsdService : 'JTSD.Search',
 			rpcService : 'Transmission.RPC',
 			contextMenu : 'Clutch.view.torrent.TorrentContextMenu'
 		});
