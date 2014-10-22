@@ -4,7 +4,7 @@ Ext.define('Clutch.view.search.properties.DetailsPanel', {
 
     alias : 'widget.searchresultdetailspanel',
 
-    requires : ['Clutch.view.search.properties.ResultInfo', 'Clutch.view.search.properties.CommentsGrid', 'Clutch.view.search.properties.MovieInfo'],
+    requires : ['Clutch.view.search.properties.ResultInfo', 'Clutch.view.search.properties.CommentsGrid'],
 
     title : 'Details',
 

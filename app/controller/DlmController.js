@@ -138,9 +138,6 @@ Ext.define('Clutch.controller.DlmController', {
             case 'view':
                 grid.openTorrentUrl();
                 break;
-            case 'showmovieinfo':
-                grid.showMovieInfo();
-                break;
         }
     },
 
