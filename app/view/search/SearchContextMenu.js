@@ -8,14 +8,6 @@ Ext.define('Clutch.view.search.SearchContextMenu', {
         action : 'download',
         itemId : 'btnDownload',
         iconCls : 'tree-downloading'
-    }, {
-        text : 'View source page',
-        action : 'view',
-        itemId : 'btnViewSourcePage'
-    }, {
-        text : 'View movie information',
-        action : 'showmovieinfo',
-        itemId : 'btnShowMovieInfo'
     }],
 
     initComponent : function() {
