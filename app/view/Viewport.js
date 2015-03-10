@@ -30,10 +30,12 @@ Ext.define('Clutch.view.Viewport', {
 			items : [
 			{
 				xtype : 'torrentspanel'
-			}, 
+			},
+	/* 
 			{
 				xtype : 'jtsdsearchpanel'
 			}
+	*/
 			]
 		}
 	]
