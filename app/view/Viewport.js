@@ -1,50 +1,43 @@
 Ext.define('Clutch.view.Viewport', {
 
-    renderTo : Ext.getBody(),
+	renderTo : Ext.getBody(),
 
-    extend : 'Ext.container.Viewport',
+	extend : 'Ext.container.Viewport',
 
-    requires : [
-    //'Clutch.view.search.SearchField', 
-    'Clutch.view.torrent.TorrentsPanel',
-    'Clutch.view.search.piratebay.SearchPanel',
-     'Clutch.view.search.piratebay.TopPanel', 
-     'Clutch.view.BottomToolbar', 
-     'Ext.layout.container.Border', 
-     'Clutch.view.MainToolbar', 
-    
-      'Clutch.view.torrent.TorrentsGrid'],
-  
-    layout : {
-        type : 'border'
-    },
+	requires : [
+		'Clutch.view.torrent.TorrentsPanel',
+		'JTSD.SearchPanel',
+		'Clutch.view.BottomToolbar',
+		'Ext.layout.container.Border',
+		'Clutch.view.MainToolbar',
+		'Clutch.view.torrent.TorrentsGrid'],
 
-    items : [
-    {
-        region : 'north',
-        xtype : 'torrenttoolbar'
+	layout : {
+		type : 'border'
+	},
 
-    }, {
-        xtype : 'bottomtoolbar',
-        region : 'south'
-    }, 
-    {
-        region : 'center',
-        xtype : 'tabpanel',
+	items : [{
+			region : 'north',
+			xtype : 'torrenttoolbar'
 
-        items : [{
-            xtype : 'torrentspanel'
-        }
-        , 
-        {
-         xtype : 'piratebaysearchpanel'
-        },
-        {
-            xtype : 'piratebaytoppanel'
-        }
-        ]
+		}, {
+			xtype : 'bottomtoolbar',
+			region : 'south'
+		}, {
+			region : 'center',
+			xtype : 'tabpanel',
 
-    }]
+			items : [
+			{
+				xtype : 'torrentspanel'
+			},
+	/* 
+			{
+				xtype : 'jtsdsearchpanel'
+			}
+	*/
+			]
+		}
+	]
 
 });
-

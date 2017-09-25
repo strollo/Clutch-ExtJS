@@ -1,7 +1,8 @@
 Ext.Loader.setConfig({
   enabled: true,
   paths: {
-    "Clutch": "app"
+    "Clutch": "app",
+	"JTSD": "packages/jtsd"
   }
 });
 

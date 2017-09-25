@@ -45,5 +45,8 @@ Ext.define('Clutch.model.SearchResult', {
     }, {
         name : 'downloads',
         type : 'number'
+    }, {
+        name : 'plugin',
+        type : 'string'
     }]
 }); 

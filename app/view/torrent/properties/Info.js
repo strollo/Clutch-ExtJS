@@ -7,17 +7,22 @@ Ext.define('Clutch.view.torrent.properties.Info', {
     alias : 'widget.torrentinfo',
     
     layout : 'column',
+	autoScroll: true,
 
-    items : [{
+    items : [
+	{
         xtype : 'fieldset',
-        title : 'Activity',
+		columnWidth: 0.5,
+        layout: 'anchor',		
+		border: 0,
+        /* title : 'Activity', */
         defaults : {
             xtype : 'textfield',
             readOnly : true,
-            width : 400
+            width : 400,
+			anchor: '100%'
         },
-        items : [{
-            
+        items : [{            
             fieldLabel : 'Availability',
             name : 'metadataPercentComplete'
         }, {
@@ -49,13 +54,20 @@ Ext.define('Clutch.view.torrent.properties.Info', {
             fieldLabel : 'Errors',
             name : 'error'
         }]
-    }, {
+    }, 
+	{
         xtype : 'fieldset',
-        title : 'Details',
+        /* title : 'Details', */
+		border: 0,
+		xtype : 'fieldset',
+		columnWidth: 0.5,
+        layout: 'anchor',		
         defaults : {
             xtype : 'textfield',
             readOnly : true,
-            width : 400
+            width : 400,			
+			anchor: '100%',
+			border: 0,
         },
         items : [{
             fieldLabel : 'Size',

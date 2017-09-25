@@ -2,7 +2,7 @@ Ext.define('Clutch.view.torrent.properties.FilesGrid', {
 
     extend : 'Ext.grid.Panel',
 
-    requires : ['Clutch.store.TorrentFiles'],
+    requires : ['Clutch.store.TorrentFiles', 'Clutch.view.column.SizeColumn'],
 
     inject : ['rpcService'],
     
