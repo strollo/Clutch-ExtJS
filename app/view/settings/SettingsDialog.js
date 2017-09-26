@@ -4,7 +4,7 @@ Ext.define("Clutch.view.settings.SettingsDialog", {
     
     controller : 'Clutch.controller.SettingsController',
 
-    requires : ['Clutch.view.settings.GeneralSettings', 'Clutch.view.settings.PeerSettings', 'Clutch.view.settings.TransfersSettings', 'Clutch.view.settings.NetworkSettings'],
+    requires : ['Clutch.view.settings.GeneralSettings', 'Clutch.view.settings.PeerSettings', 'Clutch.view.settings.TransfersSettings', 'Clutch.view.settings.ProxySettings', 'Clutch.view.settings.NetworkSettings'],
 
     title : 'Settings',
 
@@ -17,7 +17,7 @@ Ext.define("Clutch.view.settings.SettingsDialog", {
     modal : true,
 
     config : {
-        cards : ['widget.generalsettings', 'widget.peersettings','widget.networksettings', 'widget.transferssettings']
+        cards : ['widget.generalsettings', 'widget.peersettings','widget.networksettings', 'widget.proxysettings', 'widget.transferssettings']
     },
     width : 600,
 
